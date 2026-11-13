@@ -1,0 +1,6 @@
+# /etc/fstab lines  (example)
+# Drive 1: the data volume. Drive 2 is mounted INSIDE the export so clients see one tree.
+# `nofail` + a device timeout: a missing or dead drive must never stop the NAS from booting (ours has it on drive 2
+# only; put it on both). Use the UUID (blkid), never /dev/sdX.
+UUID=11111111-2222-3333-4444-555555555555  /srv/data         xfs  defaults,noatime,nofail,x-systemd.device-timeout=30s  0  2
+UUID=66666666-7777-8888-9999-000000000000  /srv/data/Drive2  xfs  defaults,noatime,nofail,x-systemd.device-timeout=30s  0  2

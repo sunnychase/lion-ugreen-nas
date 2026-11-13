@@ -1,0 +1,14 @@
+# /etc/systemd/system/atlantic-rx-fix.service  (as on our NAS, 2026-09-17: Description reworded)
+# Belt and braces for the .link file: apply the receive-offload fix before the network counts as up.
+#   sudo systemctl enable --now atlantic-rx-fix.service
+[Unit]
+Description=10 GbE port: LRO and GRO off (Aquantia AQC113 receive stall)
+After=network-pre.target
+Before=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/ethtool -K enp3s0 lro off gro off
+
+[Install]
+WantedBy=multi-user.target

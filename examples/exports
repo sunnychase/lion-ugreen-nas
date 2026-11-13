@@ -1,0 +1,4 @@
+# /etc/exports  (example)  then: sudo exportfs -ra
+# One read-only export of the data volume to named client addresses (ours: three addresses for two machines). `crossmnt` lets clients see the second
+# drive mounted inside it (see fstab-second-drive). Writes happen over SSH (rsync), never over NFS.
+/srv/data  192.0.2.10(ro,sync,no_subtree_check,crossmnt)  192.0.2.11(ro,sync,no_subtree_check,crossmnt)  192.0.2.12(ro,sync,no_subtree_check,crossmnt)

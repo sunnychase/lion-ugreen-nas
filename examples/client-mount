@@ -1,0 +1,6 @@
+# On a client machine (example). Read-only and soft: if the NAS is off, commands fail instead of hanging.
+sudo apt install nfs-common
+sudo mkdir -p /mnt/nas
+sudo mount -t nfs -o ro,soft,nfsvers=4 192.0.2.20:/srv/data /mnt/nas
+# /etc/fstab line for the same:
+# 192.0.2.20:/srv/data  /mnt/nas  nfs  ro,soft,nfsvers=4,x-systemd.automount,_netdev  0  0

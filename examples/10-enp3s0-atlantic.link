@@ -1,0 +1,14 @@
+# /etc/systemd/network/10-enp3s0-atlantic.link  (as on our NAS, 2026-09-17, amended 2026-09-30: settings unchanged, comments reworded, MAC replaced)
+# The 10 GbE port's Aquantia AQC113 (driver "atlantic") received at 220 kbit/s with LRO and GRO on, and at line
+# rate with them off. Turn both off at link setup and keep them off.
+[Match]
+MACAddress=02:00:00:00:00:01
+
+[Link]
+# A custom .link file REPLACES the default one for this device, naming policy included: without this line the port
+# came up as eth1 on 2026-09-30, the 10 GbE link stayed down and the fix below never applied.
+NamePolicy=kernel database onboard slot path
+LargeReceiveOffload=no
+GenericReceiveOffload=no
+# Optional, not on ours: Wake-on-LAN is armed by the driver's default; this pins it.
+# WakeOnLan=magic

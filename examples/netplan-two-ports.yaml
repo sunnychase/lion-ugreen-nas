@@ -1,0 +1,20 @@
+# /etc/netplan/50-two-ports.yaml  (example: edit the interface names to yours, then `sudo netplan apply`)
+#
+# The DXP4800 Pro has two wired ports. This layout, in use since 2026-09-16:
+#   enp3s0  10 GbE  Aquantia AQC113   LAN only: it takes an address but NO default route and NO DNS
+#   enp6s0  2.5 GbE Intel I226-V      the internet: default route and DNS
+# Why: with both ports on DHCP the 10 GbE port won on the default route, and our router dropped large frames
+# from that port, so every download stalled while the LAN was fine. Reserve both addresses on your router.
+network:
+  version: 2
+  ethernets:
+    enp3s0:
+      dhcp4: true
+      dhcp4-overrides:
+        use-routes: false
+        use-dns: false
+        route-metric: 100
+    enp6s0:
+      dhcp4: true
+      dhcp4-overrides:
+        route-metric: 200

@@ -1,0 +1,7 @@
+# /etc/sudoers.d/nas-poweroff  (example; install it with the three lines below, never by editing by hand)
+# Lets one account switch the NAS off without a password, and nothing else, so a client machine can run the gated
+# power-off script. Checked with visudo first; a broken sudoers file locks everyone out of sudo.
+#   printf '%s\n' 'youruser ALL=(root) NOPASSWD: /usr/bin/systemctl poweroff' > /tmp/nas-poweroff
+#   sudo visudo -cf /tmp/nas-poweroff && sudo install -m 0440 -o root -g root /tmp/nas-poweroff /etc/sudoers.d/nas-poweroff
+#   sudo visudo -c
+youruser ALL=(root) NOPASSWD: /usr/bin/systemctl poweroff
